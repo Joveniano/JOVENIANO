@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Random Joke Generator</title>
+<style>
+body {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+#joke-container {
+  margin-top: 50px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+  <h1>Random Joke Generator</h1>
+  <div id="joke-container">
+    <p id="joke"></p>
+    <button onclick="getNewJoke()">Tell me another joke!</button>
+  </div>
+
+  <script>
+    function getNewJoke() {
+      fetch('https://api.chucknorris.io/jokes/random')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('joke').textContent = data.value;
+        })
+        .catch(error => console.error('Error fetching joke:', error));
+    }
+
+    // Get an initial joke on page load
+    getNewJoke();
+  </script>
+</body>
+</html>
